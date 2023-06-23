@@ -3,10 +3,13 @@ package com.fiona.keycloakspringbootproject.user;
 import lombok.AllArgsConstructor;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("/users")
@@ -40,13 +43,13 @@ public class UserController {
         return ResponseEntity.ok("This is a secured endpoint accessible only by users with the 'ROLE_ADMIN' role.");
     }
 
-    @PreAuthorize("hasRole('member')")
     @GetMapping("/member")
+    @RolesAllowed("user")
     public ResponseEntity<String> getMember() {
         return ResponseEntity.ok("Hello Member");
     }
-    @PreAuthorize("hasRole('admin')")
     @GetMapping("/admin")
+    @RolesAllowed("admin")
     public ResponseEntity<String> getAdmin() {
         return ResponseEntity.ok("Hello Admin");
     }
