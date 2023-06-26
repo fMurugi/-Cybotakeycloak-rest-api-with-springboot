@@ -1,6 +1,7 @@
 package com.fiona.keycloakspringbootproject.user;
 
 import lombok.AllArgsConstructor;
+import org.keycloak.jose.jwk.JWK;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.context.annotation.Role;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -36,6 +38,15 @@ public class UserController {
         userService.assignUserRole(userId, role, authorizationHeader);
         return ResponseEntity.ok("User role assigned successfully.");
     }
+
+    @GetMapping("/{realmName}")
+    public ResponseEntity<List<UserRepresentation>> getAllUsers(@PathVariable("realmName") String realmName,
+                                                                @RequestHeader("Authorization") String authorizationHeader){
+        List<UserRepresentation> users = userService.getAllUsers(realmName,authorizationHeader);
+        return ResponseEntity.ok(users);
+    }
+
+
 
 
     @GetMapping("/secured")

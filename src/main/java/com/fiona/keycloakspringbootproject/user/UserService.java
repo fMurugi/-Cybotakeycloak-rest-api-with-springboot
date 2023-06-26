@@ -7,14 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.security.Key;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -54,6 +53,25 @@ public class UserService {
         String url = KeycloakServerUrl + "/realms/" + "master" + "/users/" + userId + "/role-mappings/clients" +"/1ff75cf3-99dc-4cc3-80ba-e48350f97eb0";
         restTemplate.postForObject(url, requestEntity, String.class);
     }
+
+    //get all users
+    public List<UserRepresentation> getAllUsers(String realmName, String authorizationHeader) {
+        HttpHeaders headers = createHeaders(authorizationHeader);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+        String url = KeycloakServerUrl + "/admin/realms/" + realmName + "/users";
+        UserRepresentation[] usersArray = restTemplate.exchange(url, HttpMethod.GET, requestEntity, UserRepresentation[].class).getBody();
+
+        if (usersArray != null) {
+            return Arrays.asList(usersArray);
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+
 
 
 }
