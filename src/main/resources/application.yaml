@@ -1,29 +1,23 @@
 
 
 
-#keycloak:
-#  clientid: fiona-rest-api
 
 
 
-
-#keycloak:
-#  auth-server-url: http://localhost:8181/auth/admin
-#  realm: master
-#  resource: admin-cli
-#  bearer-only: true
-#  public-client: true
-#  credentials:
-#    username: admin_user
-#    password: admin_password
-
-
+server:
+  port: 8021
+#
 keycloak:
-  auth-server-url: http://localhost:8181/auth
-  realm: test-realm
-  resource: springboot-keycloak-client
+  auth-server-url: http://localhost:8180/auth
+  realm: master
+  resource: admin-cli
   bearer-only: true
+  ssl-required: external
+  use-resource-role-mappings: true
   public-client: true
+
+
+
 
 
 

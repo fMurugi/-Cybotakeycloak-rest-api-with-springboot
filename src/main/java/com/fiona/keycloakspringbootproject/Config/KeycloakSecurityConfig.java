@@ -36,11 +36,13 @@
 //    protected NullAuthenticatedSessionStrategy sessionAuthenticationStrategy() {
 //        return new NullAuthenticatedSessionStrategy();
 //    }
+//
 //    @Override
-//    protected void configure(HttpSecurity http) throws Exception
-//    {
+//    protected void configure(HttpSecurity http) throws Exception {
 //        super.configure(http);
-//        http.authorizeRequests();
+//        http
+//                .authorizeRequests()
+//                .anyRequest().permitAll();
 //    }
 //}
 //

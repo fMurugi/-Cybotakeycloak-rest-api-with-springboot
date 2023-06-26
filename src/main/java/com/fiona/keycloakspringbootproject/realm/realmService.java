@@ -22,7 +22,7 @@ public class realmService {
     public RealmRepresentation createRealm( RealmRepresentation realm,String authorizationHeader) {
 
         HttpHeaders headers = createHeaders(authorizationHeader);
-        String url = apiUrl+"/realms";
+        String url = apiUrl+"/admin" + "/realms";
         ResponseEntity<RealmRepresentation> response = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(realm, headers), RealmRepresentation.class);
 
         return response.getBody();

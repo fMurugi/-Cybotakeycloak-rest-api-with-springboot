@@ -9,7 +9,7 @@
 //@Configuration
 //
 //public class config {
-//        @Bean
+//    @Bean
 //    public KeycloakSpringBootConfigResolver keycloakSpringBootConfigResolver() {
 //        return new KeycloakSpringBootConfigResolver();
 //    }

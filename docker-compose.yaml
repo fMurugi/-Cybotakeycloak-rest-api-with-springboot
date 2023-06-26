@@ -5,7 +5,7 @@ services:
   mysql-kc:
     image: mysql:8.0.27
     ports:
-      - 3300:3306
+      - 3000:3306
     restart: unless-stopped
     environment:
       # The user, password and database that Keycloak
@@ -23,7 +23,7 @@ services:
   keycloak-w:
     image: jboss/keycloak:16.1.0
     ports:
-      - 8181:8080
+      - 8180:8080
     restart: unless-stopped
     environment:
       # User and password for the Administration Console
