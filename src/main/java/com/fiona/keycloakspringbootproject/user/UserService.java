@@ -21,9 +21,8 @@ public class UserService {
 
     @Autowired
     private RestTemplate restTemplate;
-//    @Value("${keycloak.auth-server-url}")
-    private  String KeycloakServerUrl = "http://localhost:8181/auth/admin";
-    String clientId ="1ff75cf3-99dc-4cc3-80ba-e48350f97eb0";
+    @Value("${keycloak.auth-server-url}")
+    private  String KeycloakServerUrl ;
 
     private HttpHeaders createHeaders(String authorizationHeader) {
         HttpHeaders headers = new HttpHeaders();
@@ -38,7 +37,7 @@ public class UserService {
 
         HttpEntity<UserRepresentation> requestEntity = new HttpEntity<>(user, headers);
 
-        String url = KeycloakServerUrl + "/realms/" + "master" + "/users";
+        String url = KeycloakServerUrl +"/admin"+"/realms/" + "master" + "/users";
         restTemplate.postForObject(url, requestEntity, String.class);
     }
 

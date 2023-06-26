@@ -32,7 +32,7 @@ public class realmService {
 
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
 
-        String url = apiUrl+"/realms/"+realmName;
+        String url = apiUrl+"/admin"+ "/realms/"+realmName;
         ResponseEntity<RealmRepresentation> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, RealmRepresentation.class);
 
         return responseEntity.getBody();
